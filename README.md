@@ -10,6 +10,7 @@ This maker takes two configuration objects: `codesigning` for codesigning and `u
   - `url`: URL to the location of yml files.
   - `updaterCacheDirName`: Name of the local cache. By default `${name}-updater`.
   - `channel`: Name of the update channel. By default `latest`.
+  - `publisherName`: Used to verify the code signature. 
 
 ```ts
 // forge.config.js with minimal configuration
@@ -34,7 +35,8 @@ makers: [
         updater: {
 					url: "https://s3-us-west-2.amazonaws.com/my-bucket",
 					updaterCacheDirName: "my-updater",
-          channel: "latest"
+          channel: "latest",
+          publisherName: "My Company, Inc."
 				}
       },
     }
