@@ -58,7 +58,7 @@ export default class MakerNSIS extends MakerBase<MakerNSISConfig> {
     });
 
     log(`Writing app-update.yml to ${outPath}`, ymlContents);
-    await fs.writeFile(path.resolve(outPath, 'app-update.yml'), ymlContents, 'utf8');
+    await fs.writeFile(path.join(outPath, 'resources', 'app-update.yml'), ymlContents, 'utf8');
   }
 
   async createChannelYml(options: MakerOptions, installerPath: string) {
