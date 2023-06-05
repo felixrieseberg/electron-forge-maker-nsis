@@ -3,11 +3,11 @@ import { sign } from 'electron-windows-sign';
 import { buildForge } from 'app-builder-lib';
 import fs from 'fs-extra';
 import path from 'path';
+import debug from 'debug';
+import { getChannelYml, getAppUpdateYml } from 'electron-updater-yaml';
 
 import { MakerNSISConfig } from './config';
-import { getFileHash, getFileSize, getVersion } from './updater';
 
-import debug from 'debug';
 const log = debug('electron-forge:maker:nsis');
 
 export default class MakerNSIS extends MakerBase<MakerNSISConfig> {
@@ -50,41 +50,32 @@ export default class MakerNSIS extends MakerBase<MakerNSISConfig> {
   async createAppUpdateYml(options: MakerOptions, outPath: string) {
     if (!this.config.updater) return;
 
-    const name = options.appName;
-    const url = this.config.updater.url;
-    const channel = this.config.updater.channel || 'latest';
-    const updaterCacheDirName = this.config.updater.updaterCacheDirName || `${name.toLowerCase()}-updater`;
-    const ymlContents = `provider: generic
-url: '${url}'
-channel: ${channel}
-updaterCacheDirName: ${updaterCacheDirName}\n`;
+    const ymlContents = await getAppUpdateYml({
+      url: this.config.updater.url,
+      name: options.appName,
+      channel: this.config.updater.channel,
+      updaterCacheDirName: this.config.updater.updaterCacheDirName
+    });
 
     log(`Writing app-update.yml to ${outPath}`, ymlContents);
     await fs.writeFile(path.resolve(outPath, 'app-update.yml'), ymlContents, 'utf8');
   }
 
-  async createChannelYml(options: MakerOptions, outPath: string, installerPath: string) {
+  async createChannelYml(options: MakerOptions, installerPath: string) {
     if (!this.config.updater) return;
 
     const channel = this.config.updater.channel || 'latest';
-    const installerHash = await getFileHash(installerPath);
-    const installerSize = getFileSize(installerPath);
-    const installerVersion = getVersion(installerPath);
-    const installerName = path.basename(installerPath);
-    const channelFilePath = path.resolve(outPath, `${channel}.yml`);
+    const version = options.packageJSON.version;
+    const channelFilePath = path.resolve(installerPath, `${channel}.yml`);
 
-    const ymlContents = `version: ${installerVersion}
-files:
-  - url: ${installerName}
-    sha512: ${installerHash}
-    size: ${installerSize}
-path: ${installerName}
-sha512: ${installerHash}
-releaseDate: '${new Date().toISOString()}'\n`;
+    const ymlContents = await getChannelYml({
+      installerPath,
+      version,
+      platform: 'win32'
+    });
 
-    log(`Writing ${channel}.yml to ${outPath}`, ymlContents);
+    log(`Writing ${channel}.yml to ${installerPath}`, ymlContents);
     await fs.writeFile(channelFilePath, ymlContents, 'utf8');
-
     return channelFilePath;
   }
 
@@ -94,7 +85,6 @@ releaseDate: '${new Date().toISOString()}'\n`;
     const outPath = path.resolve(makeDir, `nsis/${targetArch}`);
     const tmpPath = path.resolve(makeDir, `nsis/${targetArch}-tmp`);
     const result: Array<string> = [];
-    let installerPath = '';
 
     log(`Emptying directories: ${tmpPath}, ${outPath}`);
     await fs.emptyDir(tmpPath);
@@ -119,21 +109,11 @@ releaseDate: '${new Date().toISOString()}'\n`;
       const filePath = path.resolve(outPath, path.basename(file));
       result.push(filePath);
 
-      if (path.extname(file) === '.exe') {
-        installerPath = filePath;
-      }
-
       await fs.move(file, filePath);
     }
 
-    // We need to create an installer to maybe create an updater channel file -
-    // if we did not make one yet, error out
-    if (!installerPath) {
-      throw new Error('Could not find the installer, did we create one?');
-    }
-
     // Updater: Create the channel file that goes _next to_ the installer
-    const channelFile = await this.createChannelYml(options, outPath, installerPath);
+    const channelFile = await this.createChannelYml(options, outPath);
     if (channelFile) result.push(channelFile);
 
     // Cleanup

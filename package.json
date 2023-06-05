@@ -6,11 +6,9 @@
   "module": "dist/esm/makerNsis.js",
   "files": [
     "dist",
-    "entitlements",
+    "yarn.lock",
     "README.md",
-    "LICENSE",
-    "bin",
-    "vendor"
+    "LICENSE"
   ],
   "repository": {
     "type": "git",
@@ -29,6 +27,7 @@
     "@electron-forge/maker-base": "^6.1.1",
     "app-builder-lib": "^24.4.0",
     "debug": "^4.3.4",
+    "electron-updater-yaml": "^1.0.0",
     "electron-windows-sign": "^1.0.0",
     "fs-extra": "^11.1.1"
   },
