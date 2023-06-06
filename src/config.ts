@@ -8,5 +8,6 @@ export interface MakerNSISConfig {
     url: string,
     channel?: string,
     updaterCacheDirName?: string,
+    publisherName?: string
   }
 }

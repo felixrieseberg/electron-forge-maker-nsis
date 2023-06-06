@@ -54,7 +54,8 @@ export default class MakerNSIS extends MakerBase<MakerNSISConfig> {
       url: this.config.updater.url,
       name: options.appName,
       channel: this.config.updater.channel,
-      updaterCacheDirName: this.config.updater.updaterCacheDirName
+      updaterCacheDirName: this.config.updater.updaterCacheDirName,
+      publisherName: this.config.updater.publisherName
     });
 
     log(`Writing app-update.yml to ${outPath}`, ymlContents);

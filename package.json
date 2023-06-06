@@ -27,7 +27,7 @@
     "@electron-forge/maker-base": "^6.1.1",
     "app-builder-lib": "^24.4.0",
     "debug": "^4.3.4",
-    "electron-updater-yaml": "^1.0.1",
+    "electron-updater-yaml": "^1.1.0",
     "electron-windows-sign": "^1.0.0",
     "fs-extra": "^11.1.1"
   },
