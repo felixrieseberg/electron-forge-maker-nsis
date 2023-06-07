@@ -1123,10 +1123,10 @@ electron-publish@24.4.0:
     lazy-val "^1.0.5"
     mime "^2.5.2"
 
-electron-updater-yaml@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/electron-updater-yaml/-/electron-updater-yaml-1.1.1.tgz#2db44faf2940cf843daef3dab1e1dcf19a64fc07"
-  integrity sha512-Mlql7aPk7fqbTzcqGEDU3QneW+5xAOlcx9J+Cn7mJIOnwFoWcnEcF+2FvIfmAw2efys2+7L0AAlwvB0BTDDErQ==
+electron-updater-yaml@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/electron-updater-yaml/-/electron-updater-yaml-1.1.2.tgz#4068e6c2ca0484c204ac6315f7475589bfc74193"
+  integrity sha512-rxlWK50wntisM2MkoyRMKNi31LO5PZuVgL5QVTTafuCkCWNEh+m/MfwAXL5dcrgDOMcj8aTUiAsCFcdOOkG+Tw==
 
 electron-windows-sign@^1.0.0:
   version "1.0.0"
