@@ -5,7 +5,7 @@ replacement for `electron-builder`. Supports code-signing and basic updates with
 
 This maker takes two configuration objects: `codesigning` for codesigning and `updater` for `electron-updater` support. Both of them are optional, the feature in question will simply be turned off if not provided.
 
-- `codesigning` is passed directly to [`electron-windows-sign`][https://github.com/felixrieseberg/electron-windows-sign] and supports all its options (except for `appDirectory`, which is provided directly by this maker).
+- `codesigning` is passed directly to [@electron/windows-sign](https://github.com/electron/windows-sign) and supports all its options (except for `appDirectory`, which is provided directly by this maker).
 - `updater`
   - `url`: URL to the location of yml files.
   - `updaterCacheDirName`: Name of the local cache. By default `${name}-updater`.
