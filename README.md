@@ -11,6 +11,7 @@ This maker takes two configuration objects: `codesigning` for codesigning and `u
   - `updaterCacheDirName`: Name of the local cache. By default `${name}-updater`.
   - `channel`: Name of the update channel. By default `latest`.
   - `publisherName`: Used to verify the code signature. 
+- `packageOptions`: Options passed to [@electron-userland/electron-builder](https://www.electron.build/configuration/configuration#configuration) for the package step.
 
 ```ts
 // forge.config.js with minimal configuration
@@ -33,11 +34,14 @@ makers: [
           certificatePassword?: string;
         },
         updater: {
-					url: "https://s3-us-west-2.amazonaws.com/my-bucket",
-					updaterCacheDirName: "my-updater",
+          url: "https://s3-us-west-2.amazonaws.com/my-bucket",
+          updaterCacheDirName: "my-updater",
           channel: "latest",
           publisherName: "My Company, Inc."
-				}
+        },
+        packageOptions: {
+          copyright: "My Company, Inc."
+        }
       },
     }
   ]
