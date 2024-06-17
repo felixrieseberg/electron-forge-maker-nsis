@@ -102,7 +102,7 @@ export default class MakerNSIS extends MakerBase<MakerNSISConfig> {
 
     // Actually make the NSIS
     log(`Calling app-builder-lib's buildForge() with ${tmpPath}`);
-    const output = await buildForge({ dir: tmpPath }, { win: [`nsis:${options.targetArch}`] });
+    const output = await buildForge({ dir: tmpPath }, { ...this.config.packageOptions, win: [`nsis:${options.targetArch}`] });
 
     // Move the output to the actual output folder, app-builder-lib might get it wrong
     log('Received output files', output);
