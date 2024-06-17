@@ -1,6 +1,6 @@
 {
   "name": "@felixrieseberg/electron-forge-maker-nsis",
-  "version": "6.0.6",
+  "version": "7.0.0",
   "description": "An `electron-forge` maker for NSIS that supports `electron-forge` v6 and can be used as a replacement for `electron-builder`. Supports code-signing and basic updates with `electron-updater`.",
   "main": "dist/cjs/makerNsis.js",
   "module": "dist/esm/makerNsis.js",
@@ -24,8 +24,8 @@
   },
   "homepage": "https://github.com/felixrieseberg/electron-forge-maker-nsis",
   "dependencies": {
-    "@electron-forge/maker-base": "^6.1.1",
-    "app-builder-lib": "^24.4.0",
+    "@electron-forge/maker-base": "^7.4.0",
+    "app-builder-lib": "^24.13.3",
     "debug": "^4.3.4",
     "electron-updater-yaml": "^1.1.2",
     "electron-windows-sign": "^1.0.0",
