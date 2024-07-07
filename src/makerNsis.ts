@@ -102,6 +102,9 @@ export default class MakerNSIS extends MakerBase<MakerNSISConfig> {
 
     // Actually make the NSIS
     log(`Calling app-builder-lib's buildForge() with ${tmpPath}`);
+    const additionalConfig = this.config.getAppBuilderConfig
+      ? await this.config.getAppBuilderConfig()
+      : {};
     const output = await buildForge({ dir: tmpPath }, {
       win: [
         `nsis:${options.targetArch}`
@@ -110,7 +113,7 @@ export default class MakerNSIS extends MakerBase<MakerNSISConfig> {
         directories: {
           output: path.resolve(tmpPath, '..', 'make')
         },
-        artifactName: this.config.artifactName
+        ...additionalConfig
       }
     });
 

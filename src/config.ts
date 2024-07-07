@@ -10,5 +10,5 @@ export interface MakerNSISConfig {
     updaterCacheDirName?: string,
     publisherName?: string
   }
-  artifactName?: string
+  getAppBuilderConfig?: () => Promise<Record<string, any>>
 }

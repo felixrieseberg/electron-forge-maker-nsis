@@ -38,7 +38,11 @@ makers: [
           channel: "latest",
           publisherName: "My Company, Inc."
 				},
-        artifactName: "${productName} Setup ${version} ${arch}.${ext}"
+        getAdditionalConfig: () => {
+          return {
+            artifactName: "${productName} Setup ${version} ${arch}.${ext}"
+          }
+        }
       },
     }
   ]
