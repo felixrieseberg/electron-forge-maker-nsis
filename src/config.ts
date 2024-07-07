@@ -10,4 +10,5 @@ export interface MakerNSISConfig {
     updaterCacheDirName?: string,
     publisherName?: string
   }
+  artifactName?: string
 }

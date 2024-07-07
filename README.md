@@ -37,7 +37,8 @@ makers: [
 					updaterCacheDirName: "my-updater",
           channel: "latest",
           publisherName: "My Company, Inc."
-				}
+				},
+        artifactName: "${productName} Setup ${version} ${arch}.${ext}"
       },
     }
   ]
