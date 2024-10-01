@@ -1,5 +1,5 @@
 import MakerBase, { MakerOptions } from '@electron-forge/maker-base';
-import { sign } from 'electron-windows-sign';
+import { sign } from '@electron/windows-sign';
 import { buildForge } from 'app-builder-lib';
 import fs from 'fs-extra';
 import path from 'path';
