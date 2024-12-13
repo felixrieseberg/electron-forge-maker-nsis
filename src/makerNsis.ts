@@ -1,5 +1,5 @@
 import MakerBase, { MakerOptions } from '@electron-forge/maker-base';
-import { sign } from 'electron-windows-sign';
+import { sign } from '@electron/windows-sign';
 import { buildForge } from 'app-builder-lib';
 import fs from 'fs-extra';
 import path from 'path';
@@ -24,7 +24,7 @@ export default class MakerNSIS extends MakerBase<MakerNSISConfig> {
       try {
         await sign({ ...this.config.codesign, appDirectory: outPath });
       } catch (error) {
-        console.error('Failed to codesign using electron-windows-sign. Check your config and the output for details!', error);
+        console.error('Failed to codesign using @electron/windows-sign. Check your config and the output for details!', error);
         throw error;
       }
 

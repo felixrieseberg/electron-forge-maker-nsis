@@ -1,4 +1,4 @@
-import { SignOptions } from 'electron-windows-sign';
+import { SignOptions } from '@electron/windows-sign';
 
 export type CodesignOptions = Omit<SignOptions, 'appDirectory'>
 
