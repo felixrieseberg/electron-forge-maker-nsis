@@ -30,12 +30,12 @@ export default class MakerNSIS extends MakerBase<MakerNSISConfig> {
 
       // Setup signing. If these variables are set, app-builder-lib will actually
       // codesign.
-      if (!process.env.CSC_LINK) {
+      if (!process.env.CSC_LINK && this.config.codesign.certificateFile) {
         log(`Setting process.env.CSC_LINK to ${this.config.codesign.certificateFile}`);
         process.env.CSC_LINK = this.config.codesign.certificateFile;
       }
 
-      if (!process.env.CSC_KEY_PASSWORD) {
+      if (!process.env.CSC_KEY_PASSWORD && this.config.codesign.certificatePassword) {
         log('Setting process.env.CSC_KEY_PASSWORD to the passed password');
         process.env.CSC_KEY_PASSWORD = this.config.codesign.certificatePassword;
       }
