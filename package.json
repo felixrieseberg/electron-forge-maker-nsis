@@ -1,6 +1,6 @@
 {
   "name": "@felixrieseberg/electron-forge-maker-nsis",
-  "version": "7.1.0",
+  "version": "7.2.0",
   "description": "An `electron-forge` maker for NSIS that supports `electron-forge` v6 and can be used as a replacement for `electron-builder`. Supports code-signing and basic updates with `electron-updater`.",
   "main": "dist/cjs/makerNsis.js",
   "module": "dist/esm/makerNsis.js",
